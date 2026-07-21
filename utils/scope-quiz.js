@@ -9,9 +9,14 @@ var x = 5;
 //let is hoisted but not initialized
 // accessing it before declaration throws ReferenceError
 //This gap is called the Temporal Dead Zone (TDZ)
+// Reference Error: Cannot access 'y' before initialization
+try{
+console.log(y); 
+let y = 5;
+}catch(e){
+    console.log('TDZ Error:', e.message);
+}
 
-// console.log(y); // Reference Error: Cannot access 'y' before initialization
-// let y = 5;
 
 //Snippet 3 - var is function scoped
 // since var is function scoped , it can be printed anywhere in the function
@@ -30,7 +35,12 @@ function testLet() {
     if (true) {
         let b = 20;
     }
-    //console.log(b);
+    try{
+        console.log(b);
+    } catch(e) {
+        console.log('let blocked scoped: ', e.message)
+    }
+    
 }
 testLet();
 
@@ -50,9 +60,14 @@ for(let j = 0 ; j < 3; j++){
 // const can be assigned only once , throws error on reassignment.
 // k holds rhe value directly. reassigning means changing what's in k
 //const blocks that
-//const k = 10;
-//k = 5;
-//console.log(k);
+const k = 10;
+try{
+    k = 5;
+    console.log(k);
+} catch(e){
+    console.log('const redeclaration error:', e.message)
+}
+
 
 // we can mutate an object decalred with const
 //details holds a reference(memory address) to the object
@@ -66,9 +81,9 @@ console.log(details.name);
 // Snippet 8 — global scope
 // j is declared outside any function — it lives in global scope
 // functions can access variables from outer scopes
-let j = 90;
+let o = 90;
 function hello(){
-    console.log(j); // 90
+    console.log(o); // 90
 }
 hello();
 
@@ -76,16 +91,22 @@ hello();
 //scope chain lookup - js walks up the chain of parent scopes until it finds the variable or hits global scope
 
 function hey(){
-    let i = 20;
+    let h = 20;
     function hola(){
-        console.log(i);
+        console.log(h);
     }
     hola();
 }
 hey();
 
 //Snippet 10 
-// var shares same variable suprised me 
-for(var i = 0; i < 3; i++) {
-    setTimeout(() => console.log(i), 100);
+// here var is function scoped so throws error as we are tring to print outside the function
+function test(){
+    var secret = 42;
+}
+test();
+try{
+    console.log(secret);
+}catch(e){
+    console.log('var function scoped:' , e.message)
 }
