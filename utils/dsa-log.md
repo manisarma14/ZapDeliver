@@ -24,3 +24,19 @@
 **Space Complexity:** O(n) — set stores window characters
 **Brute Force:** O(n²) — check every substring
 **Mistake to Avoid:** Resetting window to 0 instead of shrinking from left
+
+## Problem 4 — Longest Repeating Character Replacement (LC 424)
+
+**Pattern:** Sliding Window (Variable) + Frequency Map
+**Recognition Clue:** "longest substring after k replacements" → track max frequency character
+**Core Formula:** changes needed = window_size - max_freq. Valid if <= k
+**Time:** O(n) | **Space:** O(1) — only 26 letters
+**Mistake to Avoid:** Forgetting to remove left character from freq map when shrinking
+
+## Problem 5 — Permutation in String (LC 567)
+
+**Pattern:** Sliding Window (Fixed) + Frequency Map
+**Recognition Clue:** "permutation as substring" → fixed window = len(s1), compare freq maps
+**Core Idea:** Add right char, remove left char, compare freq maps
+**Time:** O(n) | **Space:** O(1) — only 26 letters
+**Mistake to Avoid:** Not deleting key when count reaches 0 — breaks dict comparison
