@@ -40,3 +40,21 @@
 **Core Idea:** Add right char, remove left char, compare freq maps
 **Time:** O(n) | **Space:** O(1) — only 26 letters
 **Mistake to Avoid:** Not deleting key when count reaches 0 — breaks dict comparison
+
+## Problem 6 — Range Sum Query (LC 303)
+
+**Pattern:** Prefix Sum
+**Recognition Clue:** "multiple range sum queries on same array" → build prefix once, answer in O(1)
+**Core Formula:** sum(x, y) = prefix[y+1] - prefix[x]
+**Time:** O(n) build, O(1) query | **Space:** O(n)
+**Mistake to Avoid:** Building prefix inside query function — defeats the purpose
+
+## Problem 7 — Subarray Sum Equals K (LC 560)
+
+**Pattern:** Prefix Sum + Hashmap
+**Recognition Clue:** "number of subarrays with sum = k" + negative numbers → prefix sum + hashmap
+**Core Formula:** if (prefix - k) in seen → count += seen[prefix - k]
+**Why not sliding window:** array has negative numbers — shrinking doesn't guarantee sum decreases
+**Time:** O(n) | **Space:** O(n)
+**Mistake to Avoid:** Using count += 1 instead of count += seen[prefix-k] — misses duplicate prefix sums
+**Always:** Initialize seen = {0: 1} for subarrays starting at index 0
